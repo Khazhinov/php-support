@@ -155,7 +155,7 @@ class Arr
                 }
 
                 if ((isset($base[$key]) && is_array($base[$key])) || is_array($value)) {
-                    $base[$key] = helper_array_merge_recursive_distinct($base[$key], $value);
+                    $base[$key] = self::mergeRecursiveDistinct($base[$key], $value);
                 } else {
                     if (is_numeric($key)) {
                         if (! in_array($value, $base, true)) {

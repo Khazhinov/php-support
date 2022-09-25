@@ -88,7 +88,7 @@ if (! function_exists('helper_array_merge_recursive_distinct')) {
      */
     function helper_array_merge_recursive_distinct(array ...$arrays): array
     {
-        return \Khazhinov\PhpSupport\Collection\Arr::mergeRecursiveDistinct($arrays);
+        return \Khazhinov\PhpSupport\Collection\Arr::mergeRecursiveDistinct(...$arrays);
     }
 }
 
