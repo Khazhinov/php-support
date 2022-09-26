@@ -1,6 +1,9 @@
-# php-support
 
-✏️ Набор легких инструментов и функций, который пригодиться везде!
+<p align="center"><img src="/art/header.png" alt="Social Card of PHP Support"></p>
+
+# PHP Support ✏️
+
+Набор легких инструментов и функций, который пригодится везде!
 
 ## Описание
 
