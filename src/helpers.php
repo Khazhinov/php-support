@@ -2,6 +2,20 @@
 
 declare(strict_types = 1);
 
+if (! function_exists('helper_enum_get_values')) {
+    /**
+     * Функция возвращает список значений переданного Enum.
+     * Если Enum не имеет значений, будет возвращена ошибка.
+     *
+     * @param  class-string  $enum_class
+     * @return array<mixed>
+     */
+    function helper_enum_get_values(string $enum_class): array
+    {
+        return \Khazhinov\PhpSupport\Enums\Enumerate::getValues($enum_class);
+    }
+}
+
 if (! function_exists('helper_array_recursive_sort')) {
     /**
      * Сортирует указанный массив и по ключу, и по значению
