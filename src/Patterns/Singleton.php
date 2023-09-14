@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Khazhinov\PhpSupport\Patterns;
 
@@ -16,6 +16,7 @@ abstract class Singleton
     final private function __construct()
     {
     }
+
     private function __clone()
     {
     }

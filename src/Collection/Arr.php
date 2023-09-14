@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Khazhinov\PhpSupport\Collection;
 
@@ -187,5 +187,32 @@ class Arr
         }
 
         return $tmp_array;
+    }
+
+    /**
+     * Сортирует указанный массив и по ключу, и по значению
+     *
+     * @param  array<mixed>  $array
+     * @return void
+     */
+    public static function recursiveSort(array &$array): void
+    {
+        if (self::isAssoc($array)) {
+            ksort($array);
+
+            foreach ($array as $key => &$subarray) {
+                if (is_array($subarray)) {
+                    self::recursiveSort($subarray);
+                }
+            }
+        } else {
+            sort($array);
+
+            foreach ($array as &$subarray) {
+                if (is_array($subarray)) {
+                    self::recursiveSort($subarray);
+                }
+            }
+        }
     }
 }

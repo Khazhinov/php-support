@@ -1,6 +1,19 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
+
+if (! function_exists('helper_array_recursive_sort')) {
+    /**
+     * Сортирует указанный массив и по ключу, и по значению
+     *
+     * @param  array<mixed>  $array
+     * @return void
+     */
+    function helper_array_recursive_sort(array &$array): void
+    {
+        \Khazhinov\PhpSupport\Collection\Arr::recursiveSort($array);
+    }
+}
 
 if (! function_exists('helper_array_is_assoc')) {
     /**
