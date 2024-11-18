@@ -25,7 +25,7 @@ class ArrayDTOContractCaster implements Caster
 
     /**
      * @param  array<string, mixed>  $value
-     * @return array<mixed>|ArrayAccess
+     * @return array<string, mixed>|ArrayAccess<string, mixed>
      */
     public function cast(mixed $value): array | ArrayAccess
     {
@@ -51,9 +51,9 @@ class ArrayDTOContractCaster implements Caster
     }
 
     /**
-     * @param  array<mixed>|ArrayAccess  $destination
+     * @param  array<string, mixed>|ArrayAccess<string, mixed>  $destination
      * @param  array<string, mixed>  $items
-     * @return array<mixed>|ArrayAccess
+     * @return array<string, mixed>|ArrayAccess<string, mixed>
      */
     private function mapInto(array | ArrayAccess $destination, array $items): array | ArrayAccess
     {

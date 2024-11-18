@@ -61,11 +61,11 @@ if (! function_exists('helper_array_exists')) {
     /**
      * Определяет доступность ключа в заданном массиве.
      *
-     * @param  ArrayAccess|array<mixed>  $array
-     * @param  string|int  $key
+     * @param  ArrayAccess<string, mixed>|array<string, mixed>  $array
+     * @param  string  $key
      * @return bool
      */
-    function helper_array_exists(ArrayAccess|array $array, string|int $key): bool
+    function helper_array_exists(ArrayAccess|array $array, string $key): bool
     {
         return \Khazhinov\PhpSupport\Collection\Arr::exists($array, $key);
     }
@@ -77,12 +77,12 @@ if (! function_exists('helper_array_set')) {
      *
      * Если ключ не указан (равен null), то массив будем заменён на указанное значение.
      *
-     * @param  array<mixed>  $array
-     * @param  string|null  $key
-     * @param  mixed  $value
+     * @param array<mixed> $array
+     * @param string $key
+     * @param mixed $value
      * @return array<mixed>|mixed
-     */
-    function helper_array_set(array &$array, ?string $key, mixed $value): mixed
+    */
+    function helper_array_set(array &$array, string $key, mixed $value): mixed
     {
         return \Khazhinov\PhpSupport\Collection\Arr::set($array, $key, $value);
     }
@@ -92,12 +92,12 @@ if (! function_exists('helper_array_get')) {
     /**
      * Получает элемент массива. В качестве ключа разрешается использование точечной нотации ключа.
      *
-     * @param  ArrayAccess|array<mixed>  $array
-     * @param  string|int|null  $key
+     * @param  ArrayAccess<string, mixed>|array<string, mixed>  $array
+     * @param  string  $key
      * @param  mixed  $default
      * @return mixed
      */
-    function helper_array_get(ArrayAccess|array $array, string|int|null $key, mixed $default = null): mixed
+    function helper_array_get(ArrayAccess|array $array, string $key, mixed $default = null): mixed
     {
         return \Khazhinov\PhpSupport\Collection\Arr::get($array, $key, $default);
     }

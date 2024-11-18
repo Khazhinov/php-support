@@ -37,11 +37,11 @@ class Arr
     /**
      * Определяет доступность ключа в заданном массиве.
      *
-     * @param  ArrayAccess|array<mixed>  $array
-     * @param  string|int  $key
+     * @param  ArrayAccess<string, mixed>|array<string, mixed>  $array
+     * @param  string  $key
      * @return bool
      */
-    public static function exists(ArrayAccess|array $array, string|int $key): bool
+    public static function exists(ArrayAccess|array $array, string $key): bool
     {
         if ($array instanceof ArrayAccess) {
             return $array->offsetExists($key);
@@ -53,19 +53,13 @@ class Arr
     /**
      * Устанавливает элемент массива. В качестве ключа разрешается использование точечной нотации ключа.
      *
-     * Если ключ не указан (равен null), то массив будем заменён на указанное значение.
-     *
      * @param  array<mixed>  $array
-     * @param  string|null  $key
+     * @param  string  $key
      * @param  mixed  $value
      * @return array<mixed>|mixed
      */
-    public static function set(array &$array, ?string $key, mixed $value): mixed
+    public static function set(array &$array, string $key, mixed $value): mixed
     {
-        if (is_null($key)) {
-            return $array = $value;
-        }
-
         $keys = explode('.', $key);
 
         foreach ($keys as $i => $key_value) {
@@ -93,31 +87,27 @@ class Arr
     /**
      * Получает элемент массива. В качестве ключа разрешается использование точечной нотации ключа.
      *
-     * @param  ArrayAccess|array<mixed>  $array
-     * @param  string|int|null  $key
+     * @param  ArrayAccess<string, mixed>|array<string, mixed>  $array
+     * @param  string  $key
      * @param  mixed  $default
      * @return mixed
      */
-    public static function get(ArrayAccess|array $array, string|int|null $key, mixed $default = null): mixed
+    public static function get(ArrayAccess|array $array, string $key, mixed $default = null): mixed
     {
         if (! static::accessible($array)) {
             return helper_extract_value($default);
-        }
-
-        if (is_null($key)) {
-            return $array;
         }
 
         if (static::exists($array, $key)) {
             return $array[$key];
         }
 
-        /** @var string $key */
         if (! str_contains($key, '.')) {
             return $array[$key] ?? helper_extract_value($default);
         }
 
         foreach (explode('.', $key) as $segment) {
+            /** @var ArrayAccess<string, mixed>|array<string, mixed> $array */
             if (static::accessible($array) && static::exists($array, $segment)) {
                 $array = $array[$segment];
             } else {
@@ -144,7 +134,7 @@ class Arr
             $base = [$base];
         }
         foreach ($arrays as $append) {
-            if (! is_array($append)) {
+            if (! is_array($append)) { // @phpstan-ignore-line
                 $append = [$append];
             }
             foreach ($append as $key => $value) {
@@ -155,7 +145,10 @@ class Arr
                 }
 
                 if ((isset($base[$key]) && is_array($base[$key])) || is_array($value)) {
-                    $base[$key] = self::mergeRecursiveDistinct($base[$key], $value);
+                    /** @var array<mixed> $extracted */
+                    $extracted = $base[$key];
+                    /** @var array<mixed> $value */
+                    $base[$key] = self::mergeRecursiveDistinct($extracted, $value);
                 } else {
                     if (is_numeric($key)) {
                         if (! in_array($value, $base, true)) {

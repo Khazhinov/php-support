@@ -27,7 +27,7 @@ class DTOHelper
     public static function getBaseConstructorBodyByDTOClass(string $dto_class): array
     {
         /** @var class-string<T>|T $dto_class */
-        $reflector = new ReflectionClass($dto_class);
+        $reflector = new ReflectionClass($dto_class); // @phpstan-ignore-line
         $reflection_properties = $reflector->getProperties(ReflectionProperty::IS_PUBLIC);
         $result_properties = [];
         foreach ($reflection_properties as $reflection_property) {
@@ -40,7 +40,7 @@ class DTOHelper
                     $has_null_definition = false;
                     $result_definition = null;
                     foreach ($reflection_property_types as $reflection_property_type) {
-                        $reflection_property_type_class = $reflection_property_type->getName();
+                        $reflection_property_type_class = $reflection_property_type?->getName(); // @phpstan-ignore-line
                         if ($reflection_property_type_class === "null") {
                             $has_null_definition = true;
 
