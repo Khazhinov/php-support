@@ -273,7 +273,7 @@ if (! function_exists('helper_string_substr')) {
      * @param  int|null  $length
      * @return string
      */
-    function helper_string_substr(string|null $input, int $start, int $length = null): string
+    function helper_string_substr(string|null $input, int $start, ?int $length = null): string
     {
         return \Khazhinov\PhpSupport\String\Str::substr($input, $start, $length);
     }
