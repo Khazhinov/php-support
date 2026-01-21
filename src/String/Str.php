@@ -123,7 +123,7 @@ class Str
      * @param  int|null  $length
      * @return string
      */
-    public static function substr(string|null $input, int $start, int $length = null): string
+    public static function substr(string|null $input, int $start, ?int $length = null): string
     {
         return mb_substr(u($input)->toString(), $start, $length, 'UTF-8');
     }
