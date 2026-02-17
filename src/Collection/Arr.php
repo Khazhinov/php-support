@@ -144,7 +144,7 @@ class Arr
                     continue;
                 }
 
-                if ((isset($base[$key]) && is_array($base[$key])) || is_array($value)) {
+                if ((isset($base[$key]) && is_array($base[$key])) && is_array($value)) {
                     /** @var array<mixed> $extracted */
                     $extracted = $base[$key];
                     /** @var array<mixed> $value */
